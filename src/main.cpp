@@ -1,7 +1,13 @@
-#include <iostream>
+#include "App.h"
 
 int main(int argc, char *argv[]) {
 
-  std::cout << "GameApp Template" << std::endl;
+  GameEngine gameEngine;
+
+  gameEngine.run();
+
+  int a;
+  std::cin >> a;
+
   return 0;
 }
