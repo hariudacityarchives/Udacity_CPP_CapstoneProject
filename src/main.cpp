@@ -6,8 +6,5 @@ int main(int argc, char *argv[]) {
 
   gameEngine.run();
 
-  int a;
-  std::cin >> a;
-
   return 0;
 }

@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
+enum class GameState { PLAY, EXIT };
 class GameEngine {
 
 public:
@@ -10,10 +11,15 @@ public:
   ~GameEngine();
 
   void run();
-  void initsystem();
 
 private:
   SDL_Window *_window;
   int _screenWidth;
   int _screenHeight;
+
+  GameState _gameState;
+
+  void gameLoop();
+  void processInput();
+  void initsystem();
 };
