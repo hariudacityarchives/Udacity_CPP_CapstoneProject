@@ -21,5 +21,6 @@ private:
 
   void gameLoop();
   void processInput();
+  void drawGame();
   void initsystem();
 };
