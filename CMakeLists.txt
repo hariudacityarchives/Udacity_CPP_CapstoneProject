@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.1.0)
 project(GameApp VERSION 0.1.0)
 set(OpenGL_GL_PREFERENCE "GLVND")
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 include(CTest)
 enable_testing()
 
@@ -21,7 +25,8 @@ add_subdirectory( src/game )
 
 # Executable and link
 add_executable(GameApp src/main.cpp)
-target_link_libraries(GameApp game ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} OpenGL::OpenGL)
+string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
+target_link_libraries(GameApp game ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
 
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
