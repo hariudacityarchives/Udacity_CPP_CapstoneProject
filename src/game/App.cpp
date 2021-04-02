@@ -13,8 +13,8 @@ void fatalError(std::string errorString) {
 
 GameEngine::GameEngine() {
   _window = nullptr;
-  _screenWidth = 1028;
-  _screenHeight = 768;
+  _screenWidth = 300;
+  _screenHeight = 400;
   _gameState = GameState::PLAY;
 }
 
@@ -22,6 +22,9 @@ GameEngine::~GameEngine() {}
 
 void GameEngine::run() {
   initsystem();
+
+  _sprite.init(-1.0f, -1.0f, 1.0f, 1.0f);
+
   gameLoop();
 }
 
@@ -80,15 +83,14 @@ void GameEngine::processInput() {
 
 void GameEngine::drawGame() {
 
+  // Set Base depth to 1.0
   glClearDepth(1.0);
+
+  // Clear Color and Depth Buffer
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glBegin(GL_TRIANGLES);
-  glColor3f(1.0, 0.0, 0.0);
-  glVertex2f(0, 0);
-  glVertex2f(0, 500);
-  glVertex2f(500, 500);
 
-  glEnd();
+  _sprite.draw();
 
+  // Swap our Buffer and draw everything to screen
   SDL_GL_SwapWindow(_window);
 }
