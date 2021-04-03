@@ -1,4 +1,5 @@
 #pragma once
+#include "GLSLProgram.h"
 #include "Sprite.h"
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
@@ -21,9 +22,11 @@ private:
   GameState _gameState;
 
   Sprite _sprite;
+  GLSLProgram _colorProgram;
 
   void gameLoop();
   void processInput();
   void drawGame();
   void initsystem();
+  void initShaders();
 };

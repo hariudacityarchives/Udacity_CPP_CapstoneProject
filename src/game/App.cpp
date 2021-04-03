@@ -1,15 +1,8 @@
 #include "App.h"
+#include "Errors.h"
 #include <string>
 
 void App() { std::cout << "App Function" << std::endl; }
-
-void fatalError(std::string errorString) {
-  std::cout << errorString << std::endl;
-  std::cout << "Enter any String\n";
-  int tmp;
-  std::cin >> tmp;
-  SDL_Quit();
-}
 
 GameEngine::GameEngine() {
   _window = nullptr;
@@ -21,6 +14,7 @@ GameEngine::GameEngine() {
 GameEngine::~GameEngine() {}
 
 void GameEngine::run() {
+
   initsystem();
 
   _sprite.init(-1.0f, -1.0f, 1.0f, 1.0f);
@@ -55,11 +49,25 @@ void GameEngine::initsystem() {
   SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
   glClearColor(0.0f, 0.0f, 1.0f, 1.0);
+
+  initShaders();
+}
+
+void GameEngine::initShaders() {
+
+  _colorProgram.compileShaders("../shaders/colorShading.ver",
+                               "../shaders/colorShading.frag");
+  _colorProgram.addAttribute("vertexPosition");
+  _colorProgram.linkShaders();
 }
 
 void GameEngine::gameLoop() {
   while (_gameState != GameState::EXIT) {
+    // The below function reads the event in the window Space
     processInput();
+
+    // This Function updates the Features of the Window
+    // Window Color and Shapes that are drawn with the window space
     drawGame();
   }
 }
@@ -89,7 +97,11 @@ void GameEngine::drawGame() {
   // Clear Color and Depth Buffer
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  _colorProgram.use();
+
   _sprite.draw();
+
+  _colorProgram.unuse();
 
   // Swap our Buffer and draw everything to screen
   SDL_GL_SwapWindow(_window);
