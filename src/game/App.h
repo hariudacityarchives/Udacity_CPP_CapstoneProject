@@ -24,6 +24,8 @@ private:
   Sprite _sprite;
   GLSLProgram _colorProgram;
 
+  float _time;
+
   void gameLoop();
   void processInput();
   void drawGame();

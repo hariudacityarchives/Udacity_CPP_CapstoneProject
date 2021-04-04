@@ -1,0 +1,21 @@
+1. Created a Window which is usable with OpenGL Context
+2. Create a OpenGL context (object ) and Make it the current object
+3. Sprite are 2D Bitmap Shapes integrated
+    3.1 Using Vertex Data 2d bitmaps are Created
+    3.2 Mostly Shapes are drawn using Point in the Window location
+            Display Position (-1,1)         (1,1)
+                                    (0,0)
+                             (-1,-1)        (1,-1)
+    3.3 For Drawing a Square 6 Vertex Points are Need (where in each point contains x and y location)
+
+4. Shaders
+
+    Shaders calculate rendering effects on graphics hardware with a high degree of flexibility.
+
+    The position and color (hue, saturation, brightness, and contrast) of all pixels, 
+    vertices, and/or textures used to construct a final rendered image can be altered using algorithms defined in a shader, 
+    and can be modified by external variables or textures introduced by the computer program calling the shader.
+
+    Rendering or image synthesis is the process of generating a photorealistic or non-photorealistic 
+    image from a 2D or 3D model by means of a computer program. 
+    The resulting image is referred to as the render. 

@@ -4,12 +4,9 @@
 
 void App() { std::cout << "App Function" << std::endl; }
 
-GameEngine::GameEngine() {
-  _window = nullptr;
-  _screenWidth = 300;
-  _screenHeight = 400;
-  _gameState = GameState::PLAY;
-}
+GameEngine::GameEngine()
+    : _window(nullptr), _screenWidth(300), _screenHeight(400), _time(0.0f),
+      _gameState(GameState::PLAY) {}
 
 GameEngine::~GameEngine() {}
 
@@ -67,6 +64,8 @@ void GameEngine::gameLoop() {
     // The below function reads the event in the window Space
     processInput();
 
+    _time += 0.01;
+
     // This Function updates the Features of the Window
     // Window Color and Shapes that are drawn with the window space
     drawGame();
@@ -99,6 +98,10 @@ void GameEngine::drawGame() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   _colorProgram.use();
+
+  GLuint timelocation = _colorProgram.getUniformLocation("time");
+
+  glUniform1f(timelocation, _time);
 
   _sprite.draw();
 
